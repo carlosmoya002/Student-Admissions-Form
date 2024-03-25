@@ -1,0 +1,68 @@
+CREATE DATABASE xyz_database;
+
+CREATE TABLE xyz_database.Students (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(20) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  address VARCHAR(100) NOT NULL
+);
+CREATE TABLE xyz_database.Professors(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(20) NOT NULL 
+);
+CREATE TABLE xyz_database.Courses (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  course_name VARCHAR(100) NOT NULL,
+  course_code VARCHAR(20) NOT NULL,
+  credits INT NOT NULL,
+  professor_id INT NOT NULL,
+  FOREIGN KEY (professor_id) REFERENCES Professors(id)
+);
+CREATE TABLE xyz_database.Enrollment (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  semester VARCHAR(20) NOT NULL,
+  year INT NOT NULL,
+  program_of_study VARCHAR(50) NOT NULL,
+  degree VARCHAR(50) NOT NULL,
+  status VARCHAR(20) NOT NULL,
+  student_id INT NOT NULL,
+  course_id INT NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES Students(id),
+  FOREIGN KEY (course_id ) REFERENCES Courses (id)
+);
+CREATE TABLE xyz_database.Academic_Records (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  course_name VARCHAR(100) NOT NULL,
+  course_code VARCHAR(20) NOT NULL,
+  grade VARCHAR(5) NOT NULL,
+  credits INT NOT NULL,
+  semester VARCHAR(20) NOT NULL,
+  year INT NOT NULL,
+  student_id INT NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES Students(id)
+);
+CREATE TABLE xyz_database.Extracurricular_Activites (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  activity_name VARCHAR(50) NOT NULL,
+  description VARCHAR(100) NOT NULL,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  student_id INT NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES Students(id)
+);
+
+INSERT INTO `xyz_database`.`professors` (`id`, `first_name`, `last_name`, `email`, `phone_number`) VALUES ('1', 'Kevin', 'Ramirez', 'krami4@xyz.edu', '7861234567');
+INSERT INTO `xyz_database`.`professors` (`id`, `first_name`, `last_name`, `email`, `phone_number`) VALUES ('2', 'Dario', 'Loudell', 'dloudell@xyz.edu', '7861234568');
+INSERT INTO `xyz_database`.`professors` (`id`, `first_name`, `last_name`, `email`, `phone_number`) VALUES ('3', 'Mathew', 'Torrez', 'mtorrez@xyz.edu', '7861234569');
+
+INSERT INTO `xyz_database`.`courses` (`id`, `course_name`, `course_code`, `credits`, `professor_id`) VALUES ('1', 'Computer Architecture', 'CDA3102', '3', '1');
+INSERT INTO `xyz_database`.`courses` (`id`, `course_name`, `course_code`, `credits`, `professor_id`) VALUES ('2', 'Introduction to Machine Learning', 'CAP4770', '3', '2');
+INSERT INTO `xyz_database`.`courses` (`id`, `course_name`, `course_code`, `credits`, `professor_id`) VALUES ('3', 'Logic for CS', 'COT3541', '3', '2');
+INSERT INTO `xyz_database`.`courses` (`id`, `course_name`, `course_code`, `credits`, `professor_id`) VALUES ('4', 'Database Management ', 'COP4710', '3', '3');
